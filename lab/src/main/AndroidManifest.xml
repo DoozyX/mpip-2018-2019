@@ -10,6 +10,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ExplicitActivity" />
+        <activity android:name=".ImplicitActivity"></activity>
     </application>
 
 </manifest>
