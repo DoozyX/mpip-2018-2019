@@ -11,6 +11,7 @@ import android.widget.TextView
 class MainActivity : AppCompatActivity() {
     private lateinit var btnStartExplicitActivity: Button
     private lateinit var btnStartImplicitActivity: Button
+    private lateinit var btnShareMessage: Button
     private lateinit var tvResultText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,21 @@ class MainActivity : AppCompatActivity() {
             val title: String = resources.getString(R.string.impliit_activity_title_intent)
             val chooser: Intent = Intent.createChooser(implicitActivityIntent, title)
             if (implicitActivityIntent.resolveActivity(packageManager) != null) {
+                startActivity(chooser)
+            }
+        }
+
+        btnShareMessage = findViewById(R.id.btn_share_message)
+        btnShareMessage.setOnClickListener {
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_SUBJECT, "MPiP Send Title")
+                putExtra(Intent.EXTRA_TEXT, "Content send from MainActivity")
+                type = "text/plain"
+            }
+            val title: String = resources.getString(R.string.share_app)
+            val chooser: Intent = Intent.createChooser(shareIntent, title)
+            if (shareIntent.resolveActivity(packageManager) != null) {
                 startActivity(chooser)
             }
         }
