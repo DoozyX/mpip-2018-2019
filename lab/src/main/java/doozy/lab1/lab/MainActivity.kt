@@ -6,13 +6,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Button
 import android.widget.TextView
-import java.util.logging.Logger
 
 
 class MainActivity : AppCompatActivity() {
-    private var logger: Logger = Logger.getLogger(MainActivity::class.java.name)
-
     private lateinit var btnStartExplicitActivity: Button
+    private lateinit var btnStartImplicitActivity: Button
     private lateinit var tvResultText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,17 +19,22 @@ class MainActivity : AppCompatActivity() {
 
         btnStartExplicitActivity = findViewById(R.id.btn_start_explicit_activity)
         btnStartExplicitActivity.setOnClickListener {
-            openExplicitActivity()
+            val explicitActivityIntent = Intent(this, ExplicitActivity::class.java)
+            startActivityForResult(explicitActivityIntent, 1)
+        }
+
+        btnStartImplicitActivity = findViewById(R.id.btn_start_implicit_activity)
+        btnStartImplicitActivity.setOnClickListener {
+            val implicitActivityIntent = Intent(ImplicitActivity.IMPLICIT_ACTION)
+            val title: String = resources.getString(R.string.impliit_activity_title_intent)
+            val chooser: Intent = Intent.createChooser(implicitActivityIntent, title)
+            if (implicitActivityIntent.resolveActivity(packageManager) != null) {
+                startActivity(chooser)
+            }
         }
 
 
         tvResultText = findViewById(R.id.tv_result_text)
-    }
-
-    private fun openExplicitActivity() {
-        logger.warning("BUTTON CLICKED")
-        val explicitActivityIntent = Intent(this, ExplicitActivity::class.java)
-        startActivityForResult(explicitActivityIntent, 1)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -13,19 +13,19 @@
         android:text="@string/start_explicit_activity" />
 
     <Button
-        android:id="@+id/start_implicit_activity"
+        android:id="@+id/btn_start_implicit_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start_implicit_activity" />
 
     <Button
-        android:id="@+id/share_message"
+        android:id="@+id/btn_share_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/share_message" />
 
     <Button
-        android:id="@+id/select_ann_show_image"
+        android:id="@+id/btn_select_ann_show_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/select_ann_show_image" />

@@ -8,4 +8,5 @@
     <string name="enter_text">Enter Text</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
+    <string name="impliit_activity_title_intent">SELECT IMPLICIT ACTIVITY</string>
 </resources>
