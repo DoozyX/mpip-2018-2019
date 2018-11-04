@@ -25,10 +25,10 @@
         android:text="@string/share_message" />
 
     <Button
-        android:id="@+id/btn_select_ann_show_image"
+        android:id="@+id/btn_select_and_show_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/select_ann_show_image" />
+        android:text="@string/select_and_show_image" />
 
     <TextView
         android:id="@+id/tv_result_text"

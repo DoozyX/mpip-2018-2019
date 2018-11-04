@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnStartExplicitActivity: Button
     private lateinit var btnStartImplicitActivity: Button
     private lateinit var btnShareMessage: Button
+    private lateinit var btnSelectAndShowImage: Button
     private lateinit var tvResultText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         btnStartImplicitActivity = findViewById(R.id.btn_start_implicit_activity)
         btnStartImplicitActivity.setOnClickListener {
             val implicitActivityIntent = Intent(ImplicitActivity.IMPLICIT_ACTION)
-            val title: String = resources.getString(R.string.impliit_activity_title_intent)
+            val title: String = resources.getString(R.string.implicit_activity_title_intent)
             val chooser: Intent = Intent.createChooser(implicitActivityIntent, title)
             if (implicitActivityIntent.resolveActivity(packageManager) != null) {
                 startActivity(chooser)
@@ -49,17 +50,28 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        btnSelectAndShowImage = findViewById(R.id.btn_select_and_show_image)
+        btnSelectAndShowImage.setOnClickListener {
+            val intent = Intent(Intent.ACTION_GET_CONTENT)
+            intent.type = "image/*"
+            startActivityForResult(Intent.createChooser(intent, "Select Image"), 2);
+        }
+
 
         tvResultText = findViewById(R.id.tv_result_text)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_OK) {
-                val result = data?.getStringExtra("result")
-                tvResultText.text = result
-            }
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            val result = data?.getStringExtra("result")
+            tvResultText.text = result
+        } else if (requestCode == 2 && resultCode == Activity.RESULT_OK) {
+            val imageUri = data?.data
+            val editIntent = Intent(Intent.ACTION_EDIT)
+            editIntent.setDataAndType(imageUri, "image/*")
+            editIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+            startActivity(Intent.createChooser(editIntent, null))
         }
     }
 }

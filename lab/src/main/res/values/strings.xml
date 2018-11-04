@@ -4,10 +4,10 @@
     <string name="start_explicit_activity">Start Explicit Activity</string>
     <string name="start_implicit_activity">Start Implicit Activity</string>
     <string name="share_message">Share Message</string>
-    <string name="select_ann_show_image">Select ann Show Image</string>
+    <string name="select_and_show_image">Select and Show Image</string>
     <string name="enter_text">Enter Text</string>
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
-    <string name="impliit_activity_title_intent">SELECT IMPLICIT ACTIVITY</string>
+    <string name="implicit_activity_title_intent">SELECT IMPLICIT ACTIVITY</string>
     <string name="share_app">Select app to share with</string>
 </resources>
