@@ -3,8 +3,6 @@ package com.doozy.doozymovies.movies
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.os.Handler
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -36,7 +34,6 @@ class MoviesActivity : AppCompatActivity() {
     private var mHandler: Handler? = null
     private var progressBar: ProgressBar? = null
     private var flickItemRepository: MovieItemRepository? = null
-    private var fab: FloatingActionButton? = null
     private var searchView: SearchView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +42,6 @@ class MoviesActivity : AppCompatActivity() {
         mHandler = Handler()
         flickItemRepository = MovieItemRepository(this)
         initViews()
-        bindEvents()
         initList()
     }
 
@@ -83,15 +79,6 @@ class MoviesActivity : AppCompatActivity() {
         val myToolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
         setSupportActionBar(myToolbar)
         progressBar = findViewById(R.id.progressBar)
-        fab = findViewById(R.id.fab)
-    }
-
-    private fun bindEvents() {
-        fab!!.setOnClickListener { view ->
-            syncData("")
-            Snackbar.make(view, "Syncing", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 
     private fun initList() {
@@ -138,7 +125,6 @@ class MoviesActivity : AppCompatActivity() {
     }
 
     private fun startProgress() {
-
         Thread(Runnable {
             for (i in 0..29) {
                 try {
