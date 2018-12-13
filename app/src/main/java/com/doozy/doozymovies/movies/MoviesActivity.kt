@@ -2,7 +2,6 @@ package com.doozy.doozymovies.movies
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -12,7 +11,6 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.Toast
 import com.doozy.doozymovies.R
 import com.doozy.doozymovies.movies.adapters.MovieListAdapter
@@ -31,15 +29,12 @@ class MoviesActivity : AppCompatActivity() {
     private var data: List<MovieItem>? = null
     private var cardViewAdapter: MovieListAdapter? = null
     private var linearLayoutManager: LinearLayoutManager? = null
-    private var mHandler: Handler? = null
-    private var progressBar: ProgressBar? = null
     private var flickItemRepository: MovieItemRepository? = null
     private var searchView: SearchView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
-        mHandler = Handler()
         flickItemRepository = MovieItemRepository(this)
         initViews()
         initList()
@@ -69,16 +64,9 @@ class MoviesActivity : AppCompatActivity() {
         }
     }
 
-
-    override fun onStart() {
-        super.onStart()
-        startProgress()
-    }
-
     private fun initViews() {
         val myToolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
         setSupportActionBar(myToolbar)
-        progressBar = findViewById(R.id.progressBar)
     }
 
     private fun initList() {
@@ -122,20 +110,5 @@ class MoviesActivity : AppCompatActivity() {
 
             }
         })
-    }
-
-    private fun startProgress() {
-        Thread(Runnable {
-            for (i in 0..29) {
-                try {
-                    Thread.sleep(500)
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                }
-
-                mHandler!!.post { progressBar!!.progress = i }
-
-            }
-        }).start()
     }
 }
