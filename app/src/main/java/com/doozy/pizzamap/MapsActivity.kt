@@ -154,7 +154,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             override fun onProviderDisabled(provider: String) {
             }
         }
-        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, locationListener)
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0f, locationListener)
 
     }
 
