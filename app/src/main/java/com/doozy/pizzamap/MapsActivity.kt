@@ -33,7 +33,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var mLocationManager: LocationManager
     private val mLocationViewModel: LocationViewModel = LocationViewModel(MutableLiveData())
-    private var mGoglePlacesApiInterface: GooglePlacesApiInterface? = null
+    private var mGooglePlacesAliInterface: GooglePlacesApiInterface? = null
     private var firstTime = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,7 +64,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
-        mGoglePlacesApiInterface = GoogleMapsApiClient.getRetrofit().create(GooglePlacesApiInterface::class.java)
+        mGooglePlacesAliInterface = GoogleMapsApiClient.getRetrofit().create(GooglePlacesApiInterface::class.java)
     }
 
     override fun onStart() {
@@ -120,7 +120,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val latlong = LatLng(location.latitude, location.longitude)
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latlong))
                 }
-                mGoglePlacesApiInterface?.listPlaces(
+                mGooglePlacesAliInterface?.listPlaces(
                     location.latitude.toString() + "," + location.longitude.toString(),
                     "AIzaSyD1qNrBFoW5ZZzxDb6i0Mm5sr-cxYynbXI"
                 )?.enqueue(object : Callback<GooglePlacesApiResponse> {
